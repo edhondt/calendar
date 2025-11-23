@@ -1,56 +1,127 @@
 :root {
-    --color-primary: #ADD8E6; /* Bleu ciel pâle/glacé */
-    --color-secondary: #E0FFFF; /* Bleu très pâle */
-    --color-accent: #C0C0C0; /* Argenté */
-    --color-text: #000080; /* Bleu marine foncé pour le texte */
-    --color-locked: #4682B4; /* Bleu acier pour les cases bloquées */
+    /* Vos couleurs de la palette */
+    --color-coffee-bean: #211103;
+    --color-rich-mahogany: #3D1308;
+    --color-burgundy: #7B0D1E;
+    --color-cherry-rose: #9F2042;
+    --color-lavender-blush: #F8E5EE; /* Couleur la plus claire, idéale pour le fond */
+
+    /* Attribution des rôles aux variables */
+    --color-background: var(--color-lavender-blush); /* Fond très clair et doux */
+    --color-text-dark: var(--color-coffee-bean); /* Texte foncé pour la lisibilité */
+    --color-accent: var(--color-cherry-rose); /* Accentuation, bordures, ombres douces */
+    --color-locked: var(--color-rich-mahogany); /* Cases bloquées, plus foncées */
+    --color-unlocked: var(--color-burgundy); /* Cases débloquées, bordeaux chaleureux */
 }
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: var(--color-secondary); /* Fond très clair */
-    color: var(--color-text);
+    background-color: var(--color-background); /* Utilisation de la couleur la plus claire */
+    color: var(--color-text-dark); /* Texte très foncé pour un bon contraste */
     text-align: center;
     padding: 20px;
+    margin: 0;
+}
+
+header {
+    margin-bottom: 40px;
 }
 
 h1 {
-    color: var(--color-text);
-    text-shadow: 1px 1px 2px var(--color-accent);
+    color: var(--color-text-dark);
+    text-shadow: 1px 1px 3px var(--color-accent); /* Ombre douce avec la couleur d'accent */
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.2em;
+    color: var(--color-text-dark);
 }
 
 /* Grille du Calendrier */
 .calendar-grid {
     display: grid;
-    /* 6 colonnes pour un affichage bien organisé */
-    grid-template-columns: repeat(6, 1fr); 
-    gap: 15px;
-    max-width: 900px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px; /* Un peu plus d'espace entre les cases */
+    max-width: 1000px; /* Largeur maximale augmentée pour 6 colonnes */
     margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5); /* Légèrement transparent pour laisser transparaître le fond */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Style des Cases (Jours) */
 .day {
-    background-color: var(--color-locked); /* Couleur par défaut (bloquée) */
-    color: white;
-    padding: 20px 0;
-    font-size: 2em;
+    background-color: var(--color-locked); /* Couleur foncée pour les cases bloquées */
+    color: var(--color-lavender-blush); /* Texte très clair sur fond foncé */
+    padding: 25px 0; /* Un peu plus de padding vertical */
+    font-size: 2.2em;
     font-weight: bold;
-    border: 3px solid var(--color-accent); /* Bordure argentée */
-    border-radius: 10px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background-color 0.2s, cursor 0.2s;
-    user-select: none; /* Empêche la sélection du texte */
+    border: 3px solid var(--color-accent); /* Bordure couleur accent */
+    border-radius: 12px;
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.25); /* Ombre plus prononcée */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    display: flex; /* Centrer le chiffre */
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1; /* Force les cases à être carrées */
 }
 
 /* Styles pour les cases DÉBLOQUÉES (cliquables) */
 .day.unlocked {
-    background-color: var(--color-primary); /* Bleu glacé pour celles qui sont cliquables */
+    background-color: var(--color-unlocked); /* Bordeaux chaleureux pour les cases débloquées */
     cursor: pointer;
+    color: white; /* Texte blanc pour un meilleur contraste */
 }
 
 .day.unlocked:hover {
-    background-color: #79A3B1; /* Légère variation au survol */
-    transform: scale(1.05); /* Effet de zoom au survol */
-    box-shadow: 0 0 15px var(--color-accent); /* Halo argenté */
+    background-color: #A62F4A; /* Un rose cerise légèrement plus foncé au survol */
+    transform: scale(1.08); /* Effet de zoom légèrement plus marqué */
+    box-shadow: 0 0 20px var(--color-cherry-rose); /* Halo plus intense */
+}
+
+/* Ajustement pour les pages de contenu (dayX.html) */
+/* C'est important de mettre à jour le style.css parent pour que les pages enfants en bénéficient */
+.content-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 700px;
+    margin: 50px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    color: var(--color-text-dark);
+}
+
+.content-box h1 {
+    color: var(--color-burgundy); /* Titre du message en bordeaux */
+    text-shadow: none;
+    margin-bottom: 20px;
+}
+
+.content-box p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.back-button {
+    margin-top: 30px;
+}
+
+.back-button a {
+    display: inline-block;
+    background-color: var(--color-cherry-rose);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button a:hover {
+    background-color: var(--color-burgundy);
+    transform: translateY(-2px);
 }
