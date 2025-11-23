@@ -20,47 +20,44 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    /* BACKGROUND IMAGE & FLOU */
-    background-color: var(--color-background-primary); 
-    background-image: url('assets/background-collage.jpg'); /* Assurez-vous que l'image est dans un dossier 'assets' */
-    background-size: cover; 
-    background-attachment: fixed;
-    background-position: center center;
-    filter: blur(5px); /* Applique le flou à l'image */
-    -webkit-filter: blur(5px);
-    transform: scale(1.02); 
-    
-    /* Disposition et Réinitialisation */
-    color: var(--color-text-dark);
-    text-align: center;
-    padding: 0; 
     margin: 0;
+    padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
-    align-items: center;
-    position: relative;
+    align-items: center; /* Centrer le wrapper de contenu */
+    background-color: var(--color-background-primary); /* Couleur de secours si l'image ne charge pas */
+    overflow-x: hidden; /* Empêche le défilement horizontal */
 }
 
-/* Pseudo-élément pour enlever le flou du CONTENU et fournir le fond coloré du site */
-body::before {
-    content: "";
-    position: fixed; 
+/* Le wrapper pour l'image de fond (floue et défilante) */
+.background-wrapper {
+    position: fixed; /* Reste fixe par rapport à la fenêtre */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Utilise une couleur de fond opaque pour séparer le contenu de l'image floue */
-    background-color: var(--color-background-primary); 
-    opacity: 0.9; /* Ajout d'une légère transparence pour un effet plus doux */
-    z-index: -1; 
+    background-image: url('assets/background-collage.jpg'); /* Votre image de collage */
+    background-size: cover; /* Couvre tout sans couper */
+    background-position: center top; /* Commence en haut, défile vers le bas */
+    background-repeat: no-repeat;
+    filter: blur(5px); /* Applique le flou UNIQUEMENT à l'image de fond */
+    -webkit-filter: blur(5px);
+    transform: scale(1.02); /* Pour éviter les bords flous */
+    z-index: -2; /* Place l'image derrière tout */
 }
 
-/* Le contenu doit être au-dessus du pseudo-élément body::before */
-header, .calendar-grid, .content-box {
-    position: relative;
-    z-index: 10;
+/* Le wrapper pour tout le contenu (non flou) */
+.content-wrapper {
+    position: relative; /* Pour que le z-index fonctionne */
+    z-index: 1; /* Le contenu est au-dessus de l'image de fond */
+    width: 100%; /* Prend toute la largeur disponible */
+    min-height: 100vh; /* Permet un défilement si le contenu est long */
+    display: flex; /* Pour organiser le header et le calendrier */
+    flex-direction: column;
+    align-items: center; /* Centrer horizontalement les éléments */
+    justify-content: flex-start; /* Aligner en haut */
+    padding-bottom: 50px; /* Un peu d'espace en bas pour le défilement */
 }
 
 /* ------------------------------------ */
@@ -92,7 +89,7 @@ p {
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
     max-width: 1000px; 
-    margin: 20px auto 60px auto; /* Marge ajustée */
+    margin: 20px auto 60px auto; 
     padding: 25px;
     background-color: rgba(255, 255, 255, 0.7); /* Fond du calendrier, semi-transparent */
     border-radius: 15px;
@@ -125,7 +122,7 @@ p {
 
 /* Styles pour les cases DÉBLOQUÉES (cliquables) */
 .day.unlocked {
-    background-color: var(--color-unlocked); /* Bordeaux chaleureux */
+    background-color: var(--color-unlocked); 
     cursor: pointer;
     color: white; 
 }
@@ -140,14 +137,18 @@ p {
 /* --- 5. STYLE DES PAGES DE CONTENU (DAYX.HTML) --- */
 /* ---------------------------------------- */
 
+/* Pour les pages dayX.html, il faut aussi encapsuler le contenu dans un content-wrapper */
+/* et s'assurer que le background-wrapper est présent ou que le body a l'image */
+/* Voici une version du .content-box qui s'adapte au nouveau content-wrapper */
 .content-box {
     background-color: white;
     padding: 40px;
     border-radius: 15px;
     max-width: 700px;
-    margin: 50px auto;
+    margin: 50px auto; /* Margin top et bottom restent pour l'espacement */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     color: var(--color-text-dark);
+    text-align: center; /* Pour centrer le texte dans le content-box */
 }
 
 .content-box h1 {
