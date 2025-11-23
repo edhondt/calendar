@@ -1,0 +1,56 @@
+:root {
+    --color-primary: #ADD8E6; /* Bleu ciel pâle/glacé */
+    --color-secondary: #E0FFFF; /* Bleu très pâle */
+    --color-accent: #C0C0C0; /* Argenté */
+    --color-text: #000080; /* Bleu marine foncé pour le texte */
+    --color-locked: #4682B4; /* Bleu acier pour les cases bloquées */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-secondary); /* Fond très clair */
+    color: var(--color-text);
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: var(--color-text);
+    text-shadow: 1px 1px 2px var(--color-accent);
+}
+
+/* Grille du Calendrier */
+.calendar-grid {
+    display: grid;
+    /* 6 colonnes pour un affichage bien organisé */
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 15px;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+/* Style des Cases (Jours) */
+.day {
+    background-color: var(--color-locked); /* Couleur par défaut (bloquée) */
+    color: white;
+    padding: 20px 0;
+    font-size: 2em;
+    font-weight: bold;
+    border: 3px solid var(--color-accent); /* Bordure argentée */
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s, cursor 0.2s;
+    user-select: none; /* Empêche la sélection du texte */
+}
+
+/* Styles pour les cases DÉBLOQUÉES (cliquables) */
+.day.unlocked {
+    background-color: var(--color-primary); /* Bleu glacé pour celles qui sont cliquables */
+    cursor: pointer;
+}
+
+.day.unlocked:hover {
+    background-color: #79A3B1; /* Légère variation au survol */
+    transform: scale(1.05); /* Effet de zoom au survol */
+    box-shadow: 0 0 15px var(--color-accent); /* Halo argenté */
+}
