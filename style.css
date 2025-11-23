@@ -1,183 +1,33 @@
-:root {
-    /* --- PALETTE DE COULEURS PERSONNALISÉE --- */
-    --color-coffee-bean: #211103;        /* Texte très foncé */
-    --color-rich-mahogany: #3D1308;      /* Blocage, teintes sombres */
-    --color-burgundy: #7B0D1E;           /* Débloqué, chaleureux */
-    --color-cherry-rose: #9F2042;        /* Accentuation */
-    --color-lavender-blush: #F8E5EE;     /* Fond très clair/doux */
-
-    /* Attribution des rôles */
-    --color-background-primary: var(--color-lavender-blush);
-    --color-text-dark: var(--color-coffee-bean);
-    --color-accent: var(--color-cherry-rose);
-    --color-locked: var(--color-rich-mahogany);
-    --color-unlocked: var(--color-burgundy);
-}
-
-/* ------------------------------------- */
-/* --- 1. STYLE GLOBAL (BODY) & FOND --- */
-/* ------------------------------------- */
-
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centrer le wrapper de contenu */
-    background-color: var(--color-background-primary); /* Couleur de secours si l'image ne charge pas */
-    overflow-x: hidden; /* Empêche le défilement horizontal */
-}
-
 /* Le wrapper pour l'image de fond (floue et défilante) */
 .background-wrapper {
-    position: fixed; /* Reste fixe par rapport à la fenêtre */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('assets/background-collage.jpg'); /* Votre image de collage */
-    background-size: cover; /* Couvre tout sans couper */
-    background-position: center top; /* Commence en haut, défile vers le bas */
-    background-repeat: no-repeat;
-    filter: blur(5px); /* Applique le flou UNIQUEMENT à l'image de fond */
+    background-image: url('assets/background-collage.jpg');
+    
+    /* MODIFICATION : On va faire défiler l'image sur une hauteur très grande */
+    background-size: 100% auto; /* Couvre 100% de la largeur, hauteur auto */
+    min-height: 200vh; /* Donnez-lui une très grande hauteur */
+    background-position: center top; 
+    background-repeat: repeat-y; /* Répète si l'image n'est pas assez haute */
+    
+    filter: blur(5px);
     -webkit-filter: blur(5px);
-    transform: scale(1.02); /* Pour éviter les bords flous */
-    z-index: -2; /* Place l'image derrière tout */
+    transform: scale(1.02);
+    z-index: -2; 
+
+    /* Ajout de l'animation de défilement */
+    animation: scrollBackground 60s linear infinite; /* 60s, vitesse constante, boucle */
 }
 
-/* Le wrapper pour tout le contenu (non flou) */
-.content-wrapper {
-    position: relative; /* Pour que le z-index fonctionne */
-    z-index: 1; /* Le contenu est au-dessus de l'image de fond */
-    width: 100%; /* Prend toute la largeur disponible */
-    min-height: 100vh; /* Permet un défilement si le contenu est long */
-    display: flex; /* Pour organiser le header et le calendrier */
-    flex-direction: column;
-    align-items: center; /* Centrer horizontalement les éléments */
-    justify-content: flex-start; /* Aligner en haut */
-    padding-bottom: 50px; /* Un peu d'espace en bas pour le défilement */
-}
-
-/* ------------------------------------ */
-/* --- 2. STYLE TITRES & NAVIGATION --- */
-/* ------------------------------------ */
-
-header {
-    margin: 30px auto;
-}
-
-h1 {
-    color: var(--color-text-dark);
-    text-shadow: 1px 1px 3px var(--color-accent);
-    font-size: 3em;
-    margin-bottom: 10px;
-}
-
-p {
-    font-size: 1.2em;
-    color: var(--color-text-dark);
-}
-
-/* ------------------------------------ */
-/* --- 3. GRILLE DU CALENDRIER (FRONT) --- */
-/* ------------------------------------ */
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
-    max-width: 1000px; 
-    margin: 20px auto 60px auto; 
-    padding: 25px;
-    background-color: rgba(255, 255, 255, 0.7); /* Fond du calendrier, semi-transparent */
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* ------------------------------------ */
-/* --- 4. STYLE DES CASES (DAYS) --- */
-/* ------------------------------------ */
-
-.day {
-    /* Style par défaut (Bloqué) */
-    background-color: var(--color-locked); 
-    color: var(--color-lavender-blush);
-    
-    font-size: 2.2em;
-    font-weight: bold;
-    border: 3px solid var(--color-accent);
-    border-radius: 12px;
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    user-select: none;
-    
-    /* Rendre les cases carrées */
-    aspect-ratio: 1 / 1; 
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-}
-
-/* Styles pour les cases DÉBLOQUÉES (cliquables) */
-.day.unlocked {
-    background-color: var(--color-unlocked); 
-    cursor: pointer;
-    color: white; 
-}
-
-.day.unlocked:hover {
-    background-color: #A62F4A; 
-    transform: scale(1.08); 
-    box-shadow: 0 0 20px var(--color-cherry-rose); 
-}
-
-/* ---------------------------------------- */
-/* --- 5. STYLE DES PAGES DE CONTENU (DAYX.HTML) --- */
-/* ---------------------------------------- */
-
-/* Pour les pages dayX.html, il faut aussi encapsuler le contenu dans un content-wrapper */
-/* et s'assurer que le background-wrapper est présent ou que le body a l'image */
-/* Voici une version du .content-box qui s'adapte au nouveau content-wrapper */
-.content-box {
-    background-color: white;
-    padding: 40px;
-    border-radius: 15px;
-    max-width: 700px;
-    margin: 50px auto; /* Margin top et bottom restent pour l'espacement */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    color: var(--color-text-dark);
-    text-align: center; /* Pour centrer le texte dans le content-box */
-}
-
-.content-box h1 {
-    color: var(--color-burgundy); 
-    text-shadow: none;
-    margin-bottom: 20px;
-}
-
-.content-box p {
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
-.back-button {
-    margin-top: 30px;
-}
-
-.back-button a {
-    display: inline-block;
-    background-color: var(--color-cherry-rose);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.back-button a:hover {
-    background-color: var(--color-burgundy);
-    transform: translateY(-2px);
+/* Clé de l'animation pour le défilement */
+@keyframes scrollBackground {
+    from {
+        background-position: center top; /* Commence en haut */
+    }
+    to {
+        background-position: center bottom; /* Finit en bas */
+    }
 }
