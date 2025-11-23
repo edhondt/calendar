@@ -16,11 +16,40 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: var(--color-background); /* Utilisation de la couleur la plus claire */
-    color: var(--color-text-dark); /* Texte très foncé pour un bon contraste */
+    /* BACKGROUND IMAGE DEBUT */
+    background-color: var(--color-background); /* Couleur de secours si l'image ne charge pas */
+    background-image: url('assets/background-collage.jpg'); /* Chemin vers votre image de collage */
+    background-size: cover; /* L'image couvrira tout l'arrière-plan sans étirement excessif */
+    background-attachment: fixed; /* L'image restera fixe lorsque le contenu défile */
+    background-position: center center; /* Centre l'image */
+    filter: blur(5px); /* Applique un flou à l'image de fond */
+    -webkit-filter: blur(5px); /* Pour la compatibilité avec certains navigateurs */
+    transform: scale(1.02); /* Évite les bords flous qui peuvent apparaître avec le filtre */
+    /* BACKGROUND IMAGE FIN */
+
+    color: var(--color-text-dark);
     text-align: center;
-    padding: 20px;
+    padding: 0; /* On retire le padding du body pour que l'image couvre tout */
     margin: 0;
+    min-height: 100vh; /* S'assure que le body prend au moins toute la hauteur de la fenêtre */
+
+    /* On déplace le contenu du body dans un conteneur pour appliquer le fond à l'image et non au contenu */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alignement en haut pour le contenu */
+    align-items: center;
+    position: relative; /* Nécessaire pour le pseudo-élément */
+}
+
+body::before {
+    content: "";
+    position: fixed; /* Permet de le positionner au-dessus du body flou */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background); /* La couleur unie du fond du calendrier */
+    z-index: -1; /* Place le pseudo-élément derrière le contenu mais devant l'image floue */
 }
 
 header {
@@ -43,13 +72,15 @@ p {
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 20px; /* Un peu plus d'espace entre les cases */
-    max-width: 1000px; /* Largeur maximale augmentée pour 6 colonnes */
+    gap: 20px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.5); /* Légèrement transparent pour laisser transparaître le fond */
+    background-color: rgba(255, 255, 255, 0.7); /* Rendu plus opaque pour le contraste */
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Ombre légère */
+    z-index: 1; /* Assure que le calendrier est au-dessus du fond flou */
+    position: relative; /* Nécessaire pour le z-index */
 }
 
 /* Style des Cases (Jours) */
