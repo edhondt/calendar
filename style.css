@@ -1,64 +1,79 @@
 :root {
-    /* Vos couleurs de la palette */
-    --color-coffee-bean: #211103;
-    --color-rich-mahogany: #3D1308;
-    --color-burgundy: #7B0D1E;
-    --color-cherry-rose: #9F2042;
-    --color-lavender-blush: #F8E5EE; /* Couleur la plus claire, idéale pour le fond */
+    /* --- PALETTE DE COULEURS PERSONNALISÉE --- */
+    --color-coffee-bean: #211103;        /* Texte très foncé */
+    --color-rich-mahogany: #3D1308;      /* Blocage, teintes sombres */
+    --color-burgundy: #7B0D1E;           /* Débloqué, chaleureux */
+    --color-cherry-rose: #9F2042;        /* Accentuation */
+    --color-lavender-blush: #F8E5EE;     /* Fond très clair/doux */
 
-    /* Attribution des rôles aux variables */
-    --color-background: var(--color-lavender-blush); /* Fond très clair et doux */
-    --color-text-dark: var(--color-coffee-bean); /* Texte foncé pour la lisibilité */
-    --color-accent: var(--color-cherry-rose); /* Accentuation, bordures, ombres douces */
-    --color-locked: var(--color-rich-mahogany); /* Cases bloquées, plus foncées */
-    --color-unlocked: var(--color-burgundy); /* Cases débloquées, bordeaux chaleureux */
+    /* Attribution des rôles */
+    --color-background-primary: var(--color-lavender-blush);
+    --color-text-dark: var(--color-coffee-bean);
+    --color-accent: var(--color-cherry-rose);
+    --color-locked: var(--color-rich-mahogany);
+    --color-unlocked: var(--color-burgundy);
 }
+
+/* ------------------------------------- */
+/* --- 1. STYLE GLOBAL (BODY) & FOND --- */
+/* ------------------------------------- */
 
 body {
     font-family: 'Arial', sans-serif;
-    /* BACKGROUND IMAGE DEBUT */
-    background-color: var(--color-background); /* Couleur de secours si l'image ne charge pas */
-    background-image: url('assets/background-collage.jpg'); /* Chemin vers votre image de collage */
-    background-size: cover; /* L'image couvrira tout l'arrière-plan sans étirement excessif */
-    background-attachment: fixed; /* L'image restera fixe lorsque le contenu défile */
-    background-position: center center; /* Centre l'image */
-    filter: blur(5px); /* Applique un flou à l'image de fond */
-    -webkit-filter: blur(5px); /* Pour la compatibilité avec certains navigateurs */
-    transform: scale(1.02); /* Évite les bords flous qui peuvent apparaître avec le filtre */
-    /* BACKGROUND IMAGE FIN */
-
+    /* BACKGROUND IMAGE & FLOU */
+    background-color: var(--color-background-primary); 
+    background-image: url('assets/background-collage.jpg'); /* Assurez-vous que l'image est dans un dossier 'assets' */
+    background-size: cover; 
+    background-attachment: fixed;
+    background-position: center center;
+    filter: blur(5px); /* Applique le flou à l'image */
+    -webkit-filter: blur(5px);
+    transform: scale(1.02); 
+    
+    /* Disposition et Réinitialisation */
     color: var(--color-text-dark);
     text-align: center;
-    padding: 0; /* On retire le padding du body pour que l'image couvre tout */
+    padding: 0; 
     margin: 0;
-    min-height: 100vh; /* S'assure que le body prend au moins toute la hauteur de la fenêtre */
-
-    /* On déplace le contenu du body dans un conteneur pour appliquer le fond à l'image et non au contenu */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Alignement en haut pour le contenu */
+    justify-content: flex-start; 
     align-items: center;
-    position: relative; /* Nécessaire pour le pseudo-élément */
+    position: relative;
 }
 
+/* Pseudo-élément pour enlever le flou du CONTENU et fournir le fond coloré du site */
 body::before {
     content: "";
-    position: fixed; /* Permet de le positionner au-dessus du body flou */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-background); /* La couleur unie du fond du calendrier */
-    z-index: -1; /* Place le pseudo-élément derrière le contenu mais devant l'image floue */
+    /* Utilise une couleur de fond opaque pour séparer le contenu de l'image floue */
+    background-color: var(--color-background-primary); 
+    opacity: 0.9; /* Ajout d'une légère transparence pour un effet plus doux */
+    z-index: -1; 
 }
 
+/* Le contenu doit être au-dessus du pseudo-élément body::before */
+header, .calendar-grid, .content-box {
+    position: relative;
+    z-index: 10;
+}
+
+/* ------------------------------------ */
+/* --- 2. STYLE TITRES & NAVIGATION --- */
+/* ------------------------------------ */
+
 header {
-    margin-bottom: 40px;
+    margin: 30px auto;
 }
 
 h1 {
     color: var(--color-text-dark);
-    text-shadow: 1px 1px 3px var(--color-accent); /* Ombre douce avec la couleur d'accent */
+    text-shadow: 1px 1px 3px var(--color-accent);
     font-size: 3em;
     margin-bottom: 10px;
 }
@@ -68,54 +83,63 @@ p {
     color: var(--color-text-dark);
 }
 
-/* Grille du Calendrier */
+/* ------------------------------------ */
+/* --- 3. GRILLE DU CALENDRIER (FRONT) --- */
+/* ------------------------------------ */
+
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.7); /* Rendu plus opaque pour le contraste */
+    max-width: 1000px; 
+    margin: 20px auto 60px auto; /* Marge ajustée */
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.7); /* Fond du calendrier, semi-transparent */
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Ombre légère */
-    z-index: 1; /* Assure que le calendrier est au-dessus du fond flou */
-    position: relative; /* Nécessaire pour le z-index */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Style des Cases (Jours) */
+/* ------------------------------------ */
+/* --- 4. STYLE DES CASES (DAYS) --- */
+/* ------------------------------------ */
+
 .day {
-    background-color: var(--color-locked); /* Couleur foncée pour les cases bloquées */
-    color: var(--color-lavender-blush); /* Texte très clair sur fond foncé */
-    padding: 25px 0; /* Un peu plus de padding vertical */
+    /* Style par défaut (Bloqué) */
+    background-color: var(--color-locked); 
+    color: var(--color-lavender-blush);
+    
     font-size: 2.2em;
     font-weight: bold;
-    border: 3px solid var(--color-accent); /* Bordure couleur accent */
+    border: 3px solid var(--color-accent);
     border-radius: 12px;
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.25); /* Ombre plus prononcée */
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
     user-select: none;
-    display: flex; /* Centrer le chiffre */
+    
+    /* Rendre les cases carrées */
+    aspect-ratio: 1 / 1; 
+    display: flex; 
     justify-content: center;
     align-items: center;
-    aspect-ratio: 1 / 1; /* Force les cases à être carrées */
 }
 
 /* Styles pour les cases DÉBLOQUÉES (cliquables) */
 .day.unlocked {
-    background-color: var(--color-unlocked); /* Bordeaux chaleureux pour les cases débloquées */
+    background-color: var(--color-unlocked); /* Bordeaux chaleureux */
     cursor: pointer;
-    color: white; /* Texte blanc pour un meilleur contraste */
+    color: white; 
 }
 
 .day.unlocked:hover {
-    background-color: #A62F4A; /* Un rose cerise légèrement plus foncé au survol */
-    transform: scale(1.08); /* Effet de zoom légèrement plus marqué */
-    box-shadow: 0 0 20px var(--color-cherry-rose); /* Halo plus intense */
+    background-color: #A62F4A; 
+    transform: scale(1.08); 
+    box-shadow: 0 0 20px var(--color-cherry-rose); 
 }
 
-/* Ajustement pour les pages de contenu (dayX.html) */
-/* C'est important de mettre à jour le style.css parent pour que les pages enfants en bénéficient */
+/* ---------------------------------------- */
+/* --- 5. STYLE DES PAGES DE CONTENU (DAYX.HTML) --- */
+/* ---------------------------------------- */
+
 .content-box {
     background-color: white;
     padding: 40px;
@@ -127,7 +151,7 @@ p {
 }
 
 .content-box h1 {
-    color: var(--color-burgundy); /* Titre du message en bordeaux */
+    color: var(--color-burgundy); 
     text-shadow: none;
     margin-bottom: 20px;
 }
