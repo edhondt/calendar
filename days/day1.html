@@ -3,29 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jour 1 - Un petit message !</title>
+    <title>Jour 1 - Un petit message et une surprise !</title>
     <link rel="stylesheet" href="../style.css"> 
     <style>
-        body { text-align: center; padding-top: 50px; }
-        .content-box { 
-            background-color: white; 
-            padding: 30px; 
-            border-radius: 10px; 
-            max-width: 600px; 
-            margin: 0 auto; 
-            box-shadow: 0 0 15px var(--color-accent);
+        /* Styles spécifiques pour cette page si nécessaire */
+        .content-box {
+            max-width: 800px; /* Agrandir la boîte de contenu pour le GIF */
+            padding: 50px; /* Plus d'espace */
         }
-        .back-button { margin-top: 20px; }
+        .gif-container {
+            margin: 30px 0; /* Espacement autour du GIF */
+            text-align: center;
+        }
+        .gif-container img {
+            max-width: 100%; /* Assurez-vous que le GIF ne dépasse pas la largeur */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .audio-player {
+            margin-top: 20px;
+        }
+        /* Style pour masquer le lecteur audio par défaut si vous voulez le contrôler avec JS */
+        /* audio { display: none; } */
     </style>
 </head>
 <body>
-    <div class="content-box">
-        <h1>🎁 Message du 1er Décembre 🎁</h1>
-        <p>Joyeux début du mois de l'Avent, mon amour !</p>
-        <p>J'espère que cette petite surprise te plaira. Reviens demain pour un nouveau cadeau !</p>
-    </div>
-    <div class="back-button">
-        <a href="../index.html">Retour au Calendrier</a>
+    <div class="background-wrapper"></div> <div class="content-wrapper">
+        <div class="content-box">
+            <h1>🎁 Message du 1er Décembre 🎁</h1>
+            <p>Joyeux début du mois de l'Avent, mon amour !</p>
+            <p>J'espère que cette petite surprise te plaira. Chaque jour apportera une nouvelle attention.</p>
+            <p>Pour commencer, voici un petit quelque chose pour égayer ta journée !</p>
+
+            <div class="gif-container">
+                <img src="../assets/media/mon-super-gif.gif" alt="Un GIF surprise">
+            </div>
+            
+            <div class="audio-player">
+                <audio controls autoplay loop>
+                    <source src="../assets/media/ma-musique-douce.mp3" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'élément audio.
+                </audio>
+                <p style="font-size: 0.9em; color: gray;">(Musique de fond pour l'ambiance)</p>
+            </div>
+
+            <div class="back-button">
+                <a href="../index.html">Retour au Calendrier</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
