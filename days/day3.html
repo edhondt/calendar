@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jour 10 - Quiz de Couple !</title>
+    <link rel="stylesheet" href="../style.css"> 
+    <style>
+        .content-box {
+            max-width: 900px;
+            padding: 20px;
+        }
+        .quiz-container {
+            margin: 30px auto;
+            text-align: center;
+        }
+        /* Style pour l'iframe qui contient le quiz */
+        .quiz-container iframe {
+            border-radius: 12px;
+            width: 100%;
+            height: 700px; /* Une bonne hauteur pour voir la majorité du formulaire */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--color-cherry-rose);
+        }
+        .fallback-link {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="background-wrapper"></div> 
+
+    <div class="content-wrapper">
+        <div class="content-box">
+            
+            <h1>🧠 Jour 3 : Test tes connaissances ! ❤️</h1>
+            
+            <p>J'ai préparé un quiz pour tester à quel point tu connais bien notre histoire!</p>
+            <p>Bonne chance ! Le prix pour la meilleure note, c'est un bisou (et je t'en donnerai un même si tu ne fais pas la meilleure note 😉).</p>
+
+            <div class="quiz-container">
+                
+                <p>
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSenNnbriSUgGJu9ghjy6ONiu7HbGECwFYmtpfXw0Ak-XbAtCg/viewform?usp=dialog" width="640" height="700" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
+                </p>
+
+            </div>
+            
+            <p class="fallback-link">
+                Si le quiz ne s'affiche pas correctement ci-dessus, <a href="https://docs.google.com/forms/d/e/1FAIpQLSenNnbriSUgGJu9ghjy6ONiu7HbGECwFYmtpfXw0Ak-XbAtCg/viewform?usp=dialog" target="_blank">cliquez ici pour l'ouvrir directement dans un nouvel onglet.</a>
+            </p>
+
+            <div class="back-button">
+                <a href="../index.html">Retour au Calendrier</a>
+            </div>
+            
+        </div>
+    </div>
+    
+</body>
+</html>
