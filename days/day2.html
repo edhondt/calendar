@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jour 2 - Playlist Message Secret !</title>
+    <link rel="stylesheet" href="../style.css"> 
+    <style>
+        .content-box {
+            max-width: 800px;
+            padding: 40px;
+        }
+        .spotify-container {
+            margin: 30px auto;
+            text-align: center;
+        }
+        /* Style pour le lecteur Spotify intégré */
+        .spotify-container iframe {
+            border-radius: 12px;
+            width: 100%; 
+            max-width: 500px; 
+            height: 400px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hint-text {
+            margin-top: 25px;
+            font-size: 1.3em; /* Texte plus grand pour l'indice */
+            font-weight: bold;
+            color: var(--color-burgundy); /* Couleur bordeaux pour l'accentuation */
+            padding: 10px;
+            border: 2px dashed var(--color-cherry-rose);
+            display: inline-block;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="background-wrapper"></div> 
+
+    <div class="content-wrapper">
+        <div class="content-box">
+            
+            <h1>🤫 Jour 2 : Un Message Caché en Musique ! 🎶</h1>
+            
+            <p>Mon cœur, pour cette surprise, je t'ai concocté une playlist spéciale. Monte le son et profite des morceaux, ils sont choisis pour toi !</p>
+            
+            <div class="hint-text">
+                **Indice :** Lis attentivement les **titres des chansons** dans l'ordre...
+            </div>
+
+            <div class="spotify-container">
+                <iframe 
+                    style="border-radius:12px" 
+                    src="https://open.spotify.com/embed/playlist/votre_playlist_id?utm_source=generator" 
+                    frameBorder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            </div>
+            
+            <div class="back-button">
+                <a href="../index.html">Retour au Calendrier</a>
+            </div>
+            
+        </div>
+    </div>
+    
+</body>
+</html>
