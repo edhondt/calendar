@@ -53,6 +53,28 @@
     </style>
 </head>
 <body>
+    <script>
+    // Le numéro du jour est extrait du nom du fichier (Ex: day5.html -> 5)
+    const url = window.location.pathname;
+    const dayMatch = url.match(/day(\d+)\.html/);
+    if (dayMatch) {
+        const currentDayNumber = parseInt(dayMatch[1]);
+        
+        const today = new Date();
+        const currentMonth = today.getMonth();
+        const actualDay = today.getDate();
+        
+        // Vérifie si le mois est Décembre (11) et si le jour n'est pas encore arrivé
+        if (currentMonth !== 11 || currentDayNumber > actualDay) {
+            // Redirection immédiate si l'accès est prématuré
+            alert("Petit tricheur ! Le calendrier n'est pas encore ouvert à cette date. 😉");
+            window.location.replace('../index.html'); // Utilise replace pour empêcher le retour arrière
+        }
+    } else {
+        // Redirection si le format d'URL est incorrect
+        window.location.replace('../index.html');
+    }
+</script>
     
     <div class="background-wrapper"></div> 
 
