@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jour 5 - La Photo Mystère !</title>
+    <link rel="stylesheet" href="../style.css"> 
+    <style>
+        .content-box {
+            max-width: 750px;
+            padding: 40px;
+        }
+        .photo-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .mystery-photo {
+            max-width: 90%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: filter 0.8s ease-out; /* Ajoute une transition douce au défloutage */
+        }
+        
+        /* Classe CSS qui applique le flou par défaut */
+        .mystery-photo.blurred {
+            filter: blur(20px) grayscale(50%); /* Flou prononcé avec un peu de désaturation */
+            cursor: pointer; /* Indique qu'on peut cliquer sur l'image elle-même */
+        }
+        
+        /* Style du bouton de révélation */
+        #reveal-button {
+            display: block; /* S'affiche par défaut */
+            margin: 20px auto;
+            background-color: var(--color-cherry-rose);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #reveal-button:hover {
+            background-color: var(--color-burgundy);
+        }
+
+        /* Masque le bouton après le clic (via JS) */
+        #reveal-button.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="background-wrapper"></div> 
+
+    <div class="content-wrapper">
+        <div class="content-box">
+            
+            <h1>📸 Jour 5 : Sauras-tu la Deviner ?</h1>
+            
+            <p>Mon amour, voici une photo souvenir floue ! Sauras-tu reconnaître le lieu ou le moment ?</p>
+
+            <div class="photo-container">
+                <img id="mysteryPhoto" class="mystery-photo blurred" 
+                     src="../assets/media/photo-mystere-jour5.jpg" alt="Photo mystère">
+            </div>
+            
+            <p>Clique sur l'image ou sur le bouton pour révéler le secret !</p>
+            
+            <button id="reveal-button">Révéler la Photo</button>
+
+            <div class="back-button">
+                <a href="../index.html">Retour au Calendrier</a>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const photo = document.getElementById('mysteryPhoto');
+            const button = document.getElementById('reveal-button');
+
+            const revealPhoto = () => {
+                // Retire la classe 'blurred' pour rendre l'image nette
+                photo.classList.remove('blurred');
+                // Masque le bouton après la révélation
+                button.classList.add('hidden');
+            };
+
+            // Écouteur de clic sur le bouton
+            button.addEventListener('click', revealPhoto);
+            
+            // Écouteur de clic sur l'image elle-même
+            photo.addEventListener('click', revealPhoto);
+        });
+    </script>
+</body>
+</html>
