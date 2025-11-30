@@ -1,22 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- MODE TEST ACTIF : TOUTES LES CASES SONT CLICABLES ---
+    // --- MODE PRODUCTION : VÉRIFICATION DE LA DATE ACTIVÉE ---
 
-    // 1. Parcourir les 24 cases
+    // 1. Déterminer la date d'aujourd'hui
+    const today = new Date(); 
+    // Attention : Le mois est basé sur 0, donc Décembre est 11.
+    const currentMonth = today.getMonth();
+    let currentDay = 0; 
+
+    // Si nous sommes en Décembre, on utilise le jour actuel. Sinon, currentDay reste 0.
+    if (currentMonth === 11) {
+        currentDay = today.getDate();
+        // Optionnel : Pour tester le 24 décembre n'importe quand, vous pouvez forcer :
+        // currentDay = 24; 
+    }
+    
+    // 2. Parcourir les 24 cases et gérer les interactions
     for (let day = 1; day <= 24; day++) {
         const dayElement = document.getElementById(`day-${day}`);
         
-        // FORCER la classe 'unlocked' sur toutes les cases pour le test
-        dayElement.classList.add('unlocked');
+        // Débloquer si le jour est inférieur ou égal à la date actuelle
+        if (day <= currentDay) {
+            dayElement.classList.add('unlocked');
+        }
 
-        // 2. Ajouter l'événement de clic
+        // 3. Ajouter l'événement de clic
         dayElement.addEventListener('click', () => {
-            // Puisque tout est 'unlocked' en mode test, cette redirection fonctionnera toujours.
-            
-            // Redirige vers la page secrète du jour (Ex: days/day1.html, days/day2.html, etc.)
-            window.location.href = `days/day${day}.html`;
+            if (dayElement.classList.contains('unlocked')) {
+                // CAS 1 : Cliquable (Date passée ou date du jour)
+                // Redirige vers la page secrète du jour
+                window.location.href = `days/day${day}.html`;
+            } else {
+                // CAS 2 : Non cliquable (Date future)
+                alert('Pas encore !');
+            }
         });
     }
-
-    // --- RAPPEL : Pour le 1er décembre, vous devrez revenir au code original ---
-    // Je vous le fournirai de nouveau quand vous en aurez besoin.
 });
